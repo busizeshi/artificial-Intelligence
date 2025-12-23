@@ -142,3 +142,13 @@ Thumbs.db
 *.swo
 *.xml
 .idea/*
+
+#媒体资源
+*.mp4
+*.mp3
+*.wmv
+*.wav
+*.avi
+*.gif
+*.jpg
+*.png
