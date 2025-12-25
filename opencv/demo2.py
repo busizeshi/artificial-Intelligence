@@ -4,7 +4,6 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from cv2.gapi import kernel
 
 import tools
 
@@ -170,10 +169,11 @@ HSV
 """
 礼帽和黑帽
 """
-img=cv2.imread('../data/opencv/girl1.jpg')
-kernel=cv2.getStructuringElement(cv2.MORPH_RECT,(15,15))
+# img=cv2.imread('../data/opencv/girl1.jpg')
+# kernel=cv2.getStructuringElement(cv2.MORPH_RECT,(15,15))
 # 礼帽
-tophat=cv2.morphologyEx(img,cv2.MORPH_TOPHAT,kernel)
+# tophat=cv2.morphologyEx(img,cv2.MORPH_TOPHAT,kernel)
 # 黑帽
-blackhat=cv2.morphologyEx(img,cv2.MORPH_BLACKHAT,kernel)
-tools.show_images_with_titles([img,tophat,blackhat],['Original Image','Top Hat','Black Hat'])
+# blackhat=cv2.morphologyEx(img,cv2.MORPH_BLACKHAT,kernel)
+# tools.show_images_with_titles([img,tophat,blackhat],['Original Image','Top Hat','Black Hat'])
+

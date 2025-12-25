@@ -17,7 +17,7 @@ data_dir = '../data/flower_data/'
 train_dir = os.path.join(data_dir, 'train')
 valid_dir = os.path.join(data_dir, 'valid')
 # 修改这里：填入你 cat_to_name.json 的绝对路径
-json_path = r'D:\cxx\artificial-Intelligence\data\cat_to_name.json'
+json_path = "../data/cat_to_name.json"
 
 batch_size = 32  # 建议在个人电脑上先用较小的 batch_size
 num_epochs = 20
@@ -34,18 +34,18 @@ print(f"使用设备: {device}")
 # ==========================================
 data_transforms = {
     'train': transforms.Compose([
-        transforms.RandomResizedCrop(224),  # ResNet 标准输入通常是 224x224
-        transforms.RandomRotation(45),
-        transforms.RandomHorizontalFlip(),
-        transforms.ColorJitter(brightness=0.2, contrast=0.1, saturation=0.1, hue=0.1),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        transforms.RandomResizedCrop(224),  # 随机裁剪图片 ResNet 标准输入通常是 224x224
+        transforms.RandomRotation(45),  # 随机旋转图片
+        transforms.RandomHorizontalFlip(),  # 随机水平翻转图片
+        transforms.ColorJitter(brightness=0.2, contrast=0.1, saturation=0.1, hue=0.1),  # 随机调整图片的亮度、对比度、饱和度和色调
+        transforms.ToTensor(),  # 将图片转换为张量
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # 标准化张量
     ]),
     'valid': transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        transforms.Resize(256),  # 调整图片大小
+        transforms.CenterCrop(224),  # 随机裁剪图片
+        transforms.ToTensor(),  # 将图片转换为张量
+        transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])  # 标准化张量
     ]),
 }
 
@@ -68,6 +68,39 @@ if os.path.exists(json_path):
 else:
     print(f"警告: 未找到分类映射文件 {json_path}，将使用默认类别索引。")
     cat_to_name = {str(i): name for i, name in enumerate(class_names)}
+
+import matplotlib.pyplot as plt
+
+
+def imshow(inp, title=None):
+    """展示 Tensor 格式的图片"""
+    inp = inp.numpy().transpose((1, 2, 0))
+    # 逆归一化，以便正确显示颜色
+    mean = np.array([0.485, 0.456, 0.406])
+    std = np.array([0.229, 0.224, 0.225])
+    inp = std * inp + mean
+    inp = np.clip(inp, 0, 1)  # 限制在 0-1 之间
+    plt.imshow(inp)
+    if title is not None:
+        plt.title(title)
+    plt.pause(0.001)
+
+"""
+# 1. 获取一批数据
+inputs, classes = next(iter(dataloaders['train']))
+
+# 2. 展示前 6 张图
+plt.figure(figsize=(12, 8))
+for i in range(6):
+    plt.subplot(2, 3, i + 1)
+    # 取出这批数据里的第 i 张
+    img = inputs[i]
+    # 获取对应的类别名称
+    label = cat_to_name.get(str(classes[i].item()), f"Class {classes[i].item()}")
+    imshow(img, title=label)
+
+plt.show()
+"""
 
 
 # ==========================================
