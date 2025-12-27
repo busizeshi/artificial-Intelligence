@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import tools
 
-img=cv2.imread('../data/media/girl1.jpg',cv2.IMREAD_GRAYSCALE)
+img=cv2.imread('D:/resource/girl.jpg',cv2.IMREAD_GRAYSCALE)
 
 # 高斯平滑
 img_blur=cv2.GaussianBlur(img,(5,5),1.4)
